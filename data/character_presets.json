@@ -1,27 +1,38 @@
 [
-    {
-      "name": "Chihaya Anon",
-      "content": {
-        "name": "chihaya anon",
-        "series": "",
-        "appearance": "pink hair, grey eyes",
-        "outfit": "",
-        "pose": "",
-        "item": ""
-      },
-      "remark": "例子2、5中的角色，触发词格式：角色名 + 系列"
+  {
+    "name": "Chihaya Anon (千早 爱音)",
+    "content": {
+      "name": "chihaya anon",
+      "series": "",
+      "hair_color": "pink hair",
+      "demeanor": "",
+      "expression": "",
+      "underwear": "",
+      "outfit": "",
+      "body_type": "",
+      "pose": "",
+      "posture": "",
+      "item": "",
+      "extra": "grey eyes, small breasts"
     },
-    {
-      "name": "Yuigahama Yui",
-      "content": {
-        "name": "yuigahama yui",
-        "series": "",
-        "appearance": "pink hair, red eye",
-        "outfit": "",
-        "pose": "",
-        "item": ""
-      },
-      "remark": "例子4中的角色描述"
-    }
-  ]
-  
+    "remark": "例子2、5中的角色，触发词格式：角色名 + 系列"
+  },
+  {
+    "name": "Yuigahama Yui (由比滨结衣)",
+    "content": {
+      "name": "yuigahama yui",
+      "series": "oregairu",
+      "hair_color": "pink hair",
+      "demeanor": "cheerful demeanor",
+      "expression": "bright smile",
+      "underwear": "",
+      "outfit": "",
+      "body_type": "",
+      "pose": "",
+      "posture": "",
+      "item": "",
+      "extra": "red eyes, large breasts"
+    },
+    "remark": "例子4中的角色描述"
+  }
+]
