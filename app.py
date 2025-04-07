@@ -528,7 +528,7 @@ def assemble_prompt(quality, style, camera, scene, lighting, characters):
         prompt_parts.append(scene.strip() + '\n\n')
     if lighting.strip():
         prompt_parts.append(lighting.strip() + '\n\n')
-    # 处理人物部分：多个角色的提示词用逗号隔开
+    # 处理人物部分：多个角色的提示词用括号包围
     char_prompts = []
     for char in characters:
         name = char.get("name", "").strip()
@@ -553,29 +553,35 @@ def assemble_prompt(quality, style, camera, scene, lighting, characters):
             else:
                 char_tags.append(name)
         if hair_color:
-            char_tags.append(hair_color)
+            char_tags.append(hair_color + '\n')
         if demeanor:
-            char_tags.append(demeanor)
+            char_tags.append(demeanor + '\n')
         if expression:
-            char_tags.append(expression)
+            char_tags.append(expression + '\n')
         if body_type:
             char_tags.append(body_type)
         if pose:
-            char_tags.append(pose)
+            char_tags.append(pose + '\n')
         if posture:
-            char_tags.append(posture)
+            char_tags.append(posture + '\n')
         if underwear:
             char_tags.append(underwear)
         if outfit:
             char_tags.append(outfit)
         if item:
-            char_tags.append(item)
+            char_tags.append(item + '\n')
         if extra:
             char_tags.append(extra)
         if char_tags:
-            char_prompts.append(", ".join(char_tags))
-    if char_prompts:
-        prompt_parts.append(", ".join(char_prompts))
+            # 每个角色的描述用括号包围
+            char_prompts.append("BREAK,\n(" + ", ".join(char_tags) + ")\n")
+    
+    # 添加角色数量提示(除了单角色情况)
+    if len(char_prompts) > 1:
+        prompt_parts.append(f"{len(char_prompts)} girls, \n\n" + ", ".join(char_prompts))
+    elif len(char_prompts) == 1:
+        prompt_parts.append(char_prompts[0])
+    
     final_prompt = ", ".join(prompt_parts)
     final_prompt = final_prompt.replace(",,", ",")
     return final_prompt

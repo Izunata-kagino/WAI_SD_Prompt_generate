@@ -1,21 +1,38 @@
 [
-    {
-      "name": "Ciloranko Style",
-      "content": "ciloranko, (tianliang duohe fangdongye:0.9), ask \\(askzy\\), (wlop:0.8)",
-      "mode": "replace",
-      "remark": "例子1、4、5中常用画师组合"
-    },
-    {
-      "name": "Flat Color Style",
-      "content": "ciloranko, (tianliang duohe fangdongye:0.9), (mikozin:0.6), flat color",
-      "mode": "replace",
-      "remark": "例子3中使用"
-    },
-    {
-      "name": "Aesthetic Solo",
-      "content": "aesthetic, alone, solo, super aesthetic, intricate details, vanripper, lighting, female focus, perfect eyes, colorful, BREAK",
-      "mode": "replace",
-      "remark": "例子2中的画风描述"
-    }
-  ]
-  
+  {
+    "name": "Ciloranko Style",
+    "content": "ciloranko, (tianliang duohe fangdongye:0.9), ask \\(askzy\\), (wlop:0.8)",
+    "mode": "replace",
+    "remark": "例子1、4、5中常用画师组合"
+  },
+  {
+    "name": "Flat Color Style",
+    "content": "ciloranko, (tianliang duohe fangdongye:0.9), (mikozin:0.6), flat color",
+    "mode": "replace",
+    "remark": "例子3中使用"
+  },
+  {
+    "name": "Flat Color Style Enhanced",
+    "content": "(tianliang duohe fangdongye:0.9), (mikozin:0.6), flat color, minimalism, 2D, strong lines",
+    "mode": "replace",
+    "remark": "例子3中使用"
+  },
+  {
+    "name": "Aesthetic Solo",
+    "content": "aesthetic, alone, solo, super aesthetic, intricate details, vanripper, lighting, female focus, perfect eyes, colorful, BREAK",
+    "mode": "replace",
+    "remark": "例子2中的画风描述"
+  },
+  {
+    "name": "line art",
+    "content": " vivid colors, flat color, 2D, strong lines, Pop Art, stylized, minimalism, in neon shades,",
+    "mode": "替换",
+    "remark": ""
+  },
+  {
+    "name": "Real aesthetic",
+    "content": "(tianliang duohe fangdongye:0.9), (mikozin:0.6), ask \\(askzy\\), wlop, dino \\(dinoartforame\\), aesthetic",
+    "mode": "替换",
+    "remark": ""
+  }
+]
