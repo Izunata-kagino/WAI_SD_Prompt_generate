@@ -2,6 +2,11 @@ import streamlit as st
 import json
 import os
 import uuid
+import random  # Add import for random module
+import socket
+import threading
+from flask import Flask, request, jsonify
+from preset import *
 
 # 数据存储目录
 DATA_DIR = "data"
@@ -42,408 +47,6 @@ def load_json(path, default_data):
             json.dump(default_data, f, indent=2, ensure_ascii=False)
         return default_data
 
-# --------------------------
-# 默认预设内容（参考个人用法典及示例扩充）
-default_quality_presets = [
-  {
-    "name": "High Quality",
-    "content": "very awa, masterpiece, best quality, year 2024, newest, highres, absurdres",
-    "mode": "replace",
-    "remark": "常用高质量标签，例子1/3/4/5均出现"
-  }
-]
-
-default_style_presets = [
-  {
-    "name": "Ciloranko Style",
-    "content": "ciloranko, (tianliang duohe fangdongye:0.9), ask \\(askzy\\), (wlop:0.8)",
-    "mode": "replace",
-    "remark": "例子1、4、5中常用画师组合"
-  },
-  {
-    "name": "Flat Color Style",
-    "content": "ciloranko, (tianliang duohe fangdongye:0.9), (mikozin:0.6), flat color",
-    "mode": "replace",
-    "remark": "例子3中使用"
-  },
-  {
-    "name": "Aesthetic Solo",
-    "content": "aesthetic, alone, solo, super aesthetic, intricate details, vanripper, lighting, female focus, perfect eyes, colorful, BREAK",
-    "mode": "replace",
-    "remark": "例子2中的画风描述"
-  }
-]
-
-default_camera_presets = [
-  {
-    "name": "Close Up Portrait",
-    "content": "close-up, portrait, looking at viewer, from front angle, elegant composition",
-    "mode": "replace",
-    "remark": "例子1中镜头描述"
-  },
-  {
-    "name": "Full Body",
-    "content": "full body, serene(power pose:1.25)",
-    "mode": "replace",
-    "remark": "例子4中使用"
-  },
-  {
-    "name": "Full-length Portrait",
-    "content": "full-length portrait, angry(chassing pose:1.25)",
-    "mode": "replace",
-    "remark": "例子5中使用"
-  }
-]
-
-default_scene_presets = [
-  {
-    "name": "Beach Scene",
-    "content": "tropical island, white sand beach, crystal clear turquoise water, palm trees, volcanic rock formation, luxury resort in background, summer setting",
-    "mode": "replace",
-    "remark": "例子1中的场景描述"
-  },
-  {
-    "name": "Detailed Background",
-    "content": "detailed background",
-    "mode": "replace",
-    "remark": "例子3中简单背景提示"
-  },
-  {
-    "name": "Urban Night",
-    "content": "cityscape, neon lights, rainy night",
-    "mode": "replace",
-    "remark": "补充预设，用于都市风场景"
-  }
-]
-
-default_lighting_presets = [
-  {
-    "name": "Golden Hour",
-    "content": "golden hour, sunset colors, ocean breeze, warm natural lighting, coastal atmosphere",
-    "mode": "replace",
-    "remark": "例子1中的打光描述"
-  },
-  {
-    "name": "Fluorescent",
-    "content": "fluorescent lighting, light from left, hdr photography",
-    "mode": "replace",
-    "remark": "例子3中的打光"
-  },
-  {
-    "name": "Moonlight",
-    "content": "moonlight light, light from top-right, ektachrome",
-    "mode": "replace",
-    "remark": "例子4中的打光"
-  },
-  {
-    "name": "Neon Lights",
-    "content": "neon lights light, light from top, agfa vista",
-    "mode": "replace",
-    "remark": "例子5中的打光"
-  }
-]
-
-# 人物属性默认预设
-default_hair_color_presets = [
-  {
-    "name": "Pink Hair",
-    "content": "pink hair",
-    "mode": "replace",
-    "remark": "粉色头发，常见于角色设定"
-  },
-  {
-    "name": "Blonde Hair",
-    "content": "blonde hair, golden locks",
-    "mode": "replace",
-    "remark": "金发"
-  },
-  {
-    "name": "Black Hair",
-    "content": "black hair, raven hair",
-    "mode": "replace",
-    "remark": "黑发"
-  }
-]
-
-default_demeanor_presets = [
-  {
-    "name": "Confident",
-    "content": "confident demeanor, self-assured",
-    "mode": "replace",
-    "remark": "自信的神态"
-  },
-  {
-    "name": "Shy",
-    "content": "shy demeanor, timid, bashful",
-    "mode": "replace",
-    "remark": "害羞的神态"
-  },
-  {
-    "name": "Mysterious",
-    "content": "mysterious demeanor, enigmatic",
-    "mode": "replace",
-    "remark": "神秘的神态"
-  }
-]
-
-default_expression_presets = [
-  {
-    "name": "Smile",
-    "content": "smiling, happy expression",
-    "mode": "replace",
-    "remark": "微笑表情"
-  },
-  {
-    "name": "Serious",
-    "content": "serious expression, determined face",
-    "mode": "replace",
-    "remark": "严肃表情"
-  },
-  {
-    "name": "Blushing",
-    "content": "blushing, red face, embarrassed expression",
-    "mode": "replace", 
-    "remark": "脸红表情"
-  }
-]
-
-default_underwear_presets = [
-  {
-    "name": "Lace Lingerie",
-    "content": "lace lingerie, delicate underwear",
-    "mode": "replace",
-    "remark": "蕾丝内衣"
-  },
-  {
-    "name": "Silk Bralette",
-    "content": "silk bralette, luxury underwear",
-    "mode": "replace",
-    "remark": "丝绸胸衣"
-  },
-  {
-    "name": "Fishnet",
-    "content": "fishnet underwear, revealing lingerie",
-    "mode": "replace",
-    "remark": "网状内衣"
-  }
-]
-
-default_outfit_presets = [
-  {
-    "name": "Business Formal",
-    "content": "business formal dress, professional attire",
-    "mode": "replace",
-    "remark": "商务正装"
-  },
-  {
-    "name": "Gothic Dress",
-    "content": "gothic dress, dark elegant outfit",
-    "mode": "replace",
-    "remark": "哥特风裙装"
-  },
-  {
-    "name": "Casual",
-    "content": "casual wear, t-shirt, jeans",
-    "mode": "replace",
-    "remark": "休闲装"
-  }
-]
-
-default_body_type_presets = [
-  {
-    "name": "Slender",
-    "content": "slender body, slim figure",
-    "mode": "replace",
-    "remark": "苗条体型"
-  },
-  {
-    "name": "Athletic",
-    "content": "athletic build, toned body, muscular",
-    "mode": "replace",
-    "remark": "运动型体型"
-  },
-  {
-    "name": "Curvy",
-    "content": "curvy figure, hourglass shape",
-    "mode": "replace",
-    "remark": "丰满体型"
-  }
-]
-
-default_pose_presets = [
-  {
-    "name": "Standing",
-    "content": "standing, upright position",
-    "mode": "replace",
-    "remark": "站立动作"
-  },
-  {
-    "name": "Walking",
-    "content": "walking, mid-stride",
-    "mode": "replace",
-    "remark": "行走动作"
-  },
-  {
-    "name": "Running",
-    "content": "running, in motion",
-    "mode": "replace",
-    "remark": "奔跑动作"
-  }
-]
-
-default_posture_presets = [
-  {
-    "name": "Power Pose",
-    "content": "power pose, hands on hips",
-    "mode": "replace",
-    "remark": "力量姿势"
-  },
-  {
-    "name": "Elegant",
-    "content": "elegant posture, graceful stance",
-    "mode": "replace",
-    "remark": "优雅姿势"
-  },
-  {
-    "name": "Relaxed",
-    "content": "relaxed posture, casual stance",
-    "mode": "replace",
-    "remark": "放松姿势"
-  }
-]
-
-default_character_presets = [
-  {
-    "name": "Chihaya Anon",
-    "content": {
-      "name": "chihaya anon",
-      "series": "",
-      "hair_color": "",
-      "demeanor": "",
-      "expression": "",
-      "underwear": "",
-      "outfit": "",
-      "body_type": "",
-      "pose": "",
-      "posture": "",
-      "item": "",
-      "extra": "grey eyes"
-    },
-    "remark": "例子2、5中的角色，触发词格式：角色名 + 系列"
-  },
-  {
-    "name": "Yuigahama Yui",
-    "content": {
-      "name": "yuigahama yui",
-      "series": "",
-      "hair_color": "pink hair",
-      "demeanor": "cheerful demeanor",
-      "expression": "bright smile",
-      "underwear": "",
-      "outfit": "school uniform",
-      "body_type": "slender body",
-      "pose": "standing",
-      "posture": "power pose",
-      "item": "",
-      "extra": "red eyes"
-    },
-    "remark": "例子4中的角色描述"
-  }
-]
-
-default_prompt_combinations = [
-  {
-    "name": "Combination Example 1",
-    "fields": {
-      "quality": {
-         "content": "very awa, masterpiece, best quality, year 2024, newest, highres, absurdres",
-         "mode": "replace"
-      },
-      "artists": {
-         "content": "ciloranko, (tianliang duohe fangdongye:0.9), ask \\(askzy\\), (wlop:0.8)",
-         "mode": "replace"
-      },
-      "camera": {
-         "content": "full-length portrait, angry(chassing pose:1.25)",
-         "mode": "replace"
-      },
-      "scene": {
-         "content": "(business formal dress:1.25), (fishnet strappy teddy lingerie:1.25)",
-         "mode": "replace"
-      },
-      "lighting": {
-         "content": "neon lights light, light from top, agfa vista",
-         "mode": "replace"
-      },
-      "characters": {
-         "content": [
-             {
-               "name": "chihaya anon",
-               "series": "",
-               "hair_color": "pink hair",
-               "demeanor": "confident demeanor",
-               "expression": "serious expression",
-               "underwear": "fishnet underwear",
-               "outfit": "business formal dress",
-               "body_type": "slender body",
-               "pose": "standing",
-               "posture": "power pose",
-               "item": "",
-               "extra": "grey eyes, unaligned breasts"
-             }
-         ],
-         "mode": "replace"
-      }
-    },
-    "remark": "例子5：人物、打光、服饰组合预设"
-  },
-  {
-    "name": "Combination Example 2",
-    "fields": {
-      "quality": {
-         "content": "very awa, masterpiece, best quality, year 2024, newest, highres, absurdres",
-         "mode": "replace"
-      },
-      "artists": {
-         "content": "ciloranko, (tianliang duohe fangdongye:0.9), ask \\(askzy\\), (wlop:0.8)",
-         "mode": "replace"
-      },
-      "camera": {
-         "content": "full body, serene(power pose:1.25)",
-         "mode": "replace"
-      },
-      "scene": {
-         "content": "gothic dress:1.25, embroidered silk bralette lingerie:1.25",
-         "mode": "replace"
-      },
-      "lighting": {
-         "content": "moonlight light, light from top-right, ektachrome",
-         "mode": "replace"
-      },
-      "characters": {
-         "content": [
-             {
-               "name": "yuigahama yui",
-               "series": "",
-               "hair_color": "pink hair",
-               "demeanor": "cheerful demeanor",
-               "expression": "bright smile",
-               "underwear": "silk bralette",
-               "outfit": "gothic dress",
-               "body_type": "slender body",
-               "pose": "standing",
-               "posture": "elegant posture",
-               "item": "",
-               "extra": "red eyes"
-             }
-         ],
-         "mode": "replace"
-      }
-    },
-    "remark": "例子4：单角色组合预设"
-  }
-]
-
 # 读取各预设文件
 quality_presets = load_json(QUALITY_PRESETS_PATH, default_quality_presets)
 style_presets = load_json(STYLE_PRESETS_PATH, default_style_presets)
@@ -480,15 +83,18 @@ def on_preset_change(preset_type, preset_select_key, input_key, mode_key):
             "lighting": lighting_presets
         }
         presets = presets_map.get(preset_type, [])
-        preset = next((p for p in presets if p["name"] == st.session_state[preset_select_key]), None)
-        if preset:
-            if st.session_state[mode_key] == "替换":
-                st.session_state[input_key] = preset["content"]
-            else:
-                current = st.session_state[input_key]
-                if current and not current.endswith(", "):
-                    current += ", "
-                st.session_state[input_key] = current + preset["content"]
+        
+        # 不再在这里处理随机选项，而是记录选择了Random
+        if st.session_state[preset_select_key] != "Random":
+            preset = next((p for p in presets if p["name"] == st.session_state[preset_select_key]), None)
+            if preset:
+                if st.session_state[mode_key] == "替换":
+                    st.session_state[input_key] = preset["content"]
+                else:
+                    current = st.session_state[input_key]
+                    if current and not current.endswith(", "):
+                        current += ", "
+                    st.session_state[input_key] = current + preset["content"]
 
 # 角色属性预设加载回调函数
 def on_char_attr_preset_change(preset_type, preset_select_key, input_key, mode_key, char_id):
@@ -504,16 +110,128 @@ def on_char_attr_preset_change(preset_type, preset_select_key, input_key, mode_k
             "posture": posture_presets
         }
         presets = presets_map.get(preset_type, [])
-        preset = next((p for p in presets if p["name"] == st.session_state[preset_select_key]), None)
-        if preset:
-            full_input_key = f"{input_key}_{char_id}"
-            if st.session_state[mode_key] == "替换":
-                st.session_state[full_input_key] = preset["content"]
-            else:
-                current = st.session_state[full_input_key]
-                if current and not current.endswith(", "):
-                    current += ", "
-                st.session_state[full_input_key] = current + preset["content"]
+        
+        # 不再在这里处理随机选项，而是记录选择了Random
+        if st.session_state[preset_select_key] != "Random":    
+            preset = next((p for p in presets if p["name"] == st.session_state[preset_select_key]), None)
+            if preset:
+                full_input_key = f"{input_key}_{char_id}"
+                if st.session_state[mode_key] == "替换":
+                    st.session_state[full_input_key] = preset["content"]
+                else:
+                    current = st.session_state[full_input_key]
+                    if current and not current.endswith(", "):
+                        current += ", "
+                    st.session_state[full_input_key] = current + preset["content"]
+
+# 查找可用端口
+def find_available_port(start_port=5000, max_port=5050):
+    for port in range(start_port, max_port):
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(1)
+        result = sock.connect_ex(('localhost', port))
+        sock.close()
+        if result != 0:  # 端口未被占用
+            return port
+    return None
+
+# 创建API服务器
+def create_api_server(port, app_state):
+    api_app = Flask(__name__)
+    
+    @api_app.route('/generate_prompt', methods=['POST'])
+    def api_generate_prompt():
+        try:
+            data = request.json
+            
+            # 处理输入数据
+            quality = data.get('quality', '')
+            style = data.get('style', '')
+            camera = data.get('camera', '')
+            scene = data.get('scene', '')
+            lighting = data.get('lighting', '')
+            characters = data.get('characters', [])
+            
+            # 处理随机预设
+            quality, style, camera, scene, lighting, characters = process_random_presets(
+                quality, style, camera, scene, lighting, characters)
+            
+            # 生成提示词
+            prompt = assemble_prompt(quality, style, camera, scene, lighting, characters)
+            
+            return jsonify({
+                'status': 'success',
+                'prompt': prompt,
+                'quality': quality,
+                'style': style,
+                'camera': camera,
+                'scene': scene,
+                'lighting': lighting,
+                'characters': characters
+            })
+        except Exception as e:
+            return jsonify({
+                'status': 'error',
+                'message': str(e)
+            }), 500
+    
+    api_app.run(host='0.0.0.0', port=port, debug=False, threaded=True)
+
+# 启动API服务器
+def start_api_server(port, app_state):
+    api_thread = threading.Thread(
+        target=create_api_server, 
+        args=(port, app_state),
+        daemon=True
+    )
+    api_thread.start()
+    return api_thread
+
+# 处理随机预设
+def process_random_presets(quality, style, camera, scene, lighting, characters):
+    # 处理主要预设的随机选择
+    if quality == "Random" and quality_presets:
+        quality = random.choice(quality_presets)["content"]
+    
+    if style == "Random" and style_presets:
+        style = random.choice(style_presets)["content"]
+    
+    if camera == "Random" and camera_presets:
+        camera = random.choice(camera_presets)["content"]
+    
+    if scene == "Random" and scene_presets:
+        scene = random.choice(scene_presets)["content"]
+    
+    if lighting == "Random" and lighting_presets:
+        lighting = random.choice(lighting_presets)["content"]
+    
+    # 处理角色属性的随机选择
+    for char in characters:
+        if char.get("hair_color") == "Random" and hair_color_presets:
+            char["hair_color"] = random.choice(hair_color_presets)["content"]
+        
+        if char.get("demeanor") == "Random" and demeanor_presets:
+            char["demeanor"] = random.choice(demeanor_presets)["content"]
+        
+        if char.get("expression") == "Random" and expression_presets:
+            char["expression"] = random.choice(expression_presets)["content"]
+        
+        if char.get("underwear") == "Random" and underwear_presets:
+            char["underwear"] = random.choice(underwear_presets)["content"]
+        
+        if char.get("outfit") == "Random" and outfit_presets:
+            char["outfit"] = random.choice(outfit_presets)["content"]
+        
+        if char.get("body_type") == "Random" and body_type_presets:
+            char["body_type"] = random.choice(body_type_presets)["content"]
+        
+        if char.get("pose") == "Random" and pose_presets:
+            char["pose"] = random.choice(pose_presets)["content"]
+        
+        if char.get("posture") == "Random" and posture_presets:
+            char["posture"] = random.choice(posture_presets)["content"]
+    
+    return quality, style, camera, scene, lighting, characters
 
 # 拼接提示词函数
 def assemble_prompt(quality, style, camera, scene, lighting, characters):
@@ -593,9 +311,15 @@ default_camera = camera_presets[0]["content"] if camera_presets else ""
 default_scene = scene_presets[0]["content"] if scene_presets else ""
 default_lighting = lighting_presets[0]["content"] if lighting_presets else ""
 
+# 初始化API状态
+if 'api_running' not in st.session_state:
+    st.session_state.api_running = False
+    st.session_state.api_port = None
+    st.session_state.api_thread = None
+
 # 设置 Streamlit 页面
 st.set_page_config(page_title="Prompt 生成系统", layout="wide")
-page = st.sidebar.selectbox("选择页面", ["生成提示词", "预设管理"])
+page = st.sidebar.selectbox("选择页面", ["生成提示词", "预设管理", "API设置"])
 
 if page == "生成提示词":
     st.title("Prompt 生成系统")
@@ -607,7 +331,7 @@ if page == "生成提示词":
     with col1:
         quality_input = st.text_input("请输入质量词（英文逗号分隔）", value=default_quality, key="quality_input")
     with col2:
-        preset_names = [p["name"] for p in quality_presets]
+        preset_names = ["Random"] + [p["name"] for p in quality_presets]
         mode_quality = st.radio("应用模式", ["替换", "追加"], index=0, key="quality_mode")
         selected_quality_preset = st.selectbox(
             "选择质量预设", 
@@ -623,7 +347,7 @@ if page == "生成提示词":
     with col1:
         style_input = st.text_input("请输入画师/风格标签", value=default_style, key="style_input")
     with col2:
-        preset_names = [p["name"] for p in style_presets]
+        preset_names = ["Random"] + [p["name"] for p in style_presets]
         mode_style = st.radio("应用模式", ["替换", "追加"], index=0, key="style_mode")
         selected_style_preset = st.selectbox(
             "选择画师预设", 
@@ -639,7 +363,7 @@ if page == "生成提示词":
     with col1:
         camera_input = st.text_input("请输入镜头设置描述", value=default_camera, key="camera_input")
     with col2:
-        preset_names = [p["name"] for p in camera_presets]
+        preset_names = ["Random"] + [p["name"] for p in camera_presets]
         mode_camera = st.radio("应用模式", ["替换", "追加"], index=0, key="camera_mode")
         selected_camera_preset = st.selectbox(
             "选择镜头预设", 
@@ -655,7 +379,7 @@ if page == "生成提示词":
     with col1:
         scene_input = st.text_input("请输入场景描述", value=default_scene, key="scene_input")
     with col2:
-        preset_names = [p["name"] for p in scene_presets]
+        preset_names = ["Random"] + [p["name"] for p in scene_presets]
         mode_scene = st.radio("应用模式", ["替换", "追加"], index=0, key="scene_mode")
         selected_scene_preset = st.selectbox(
             "选择场景预设", 
@@ -671,7 +395,7 @@ if page == "生成提示词":
     with col1:
         lighting_input = st.text_input("请输入打光描述", value=default_lighting, key="lighting_input")
     with col2:
-        preset_names = [p["name"] for p in lighting_presets]
+        preset_names = ["Random"] + [p["name"] for p in lighting_presets]
         mode_lighting = st.radio("应用模式", ["替换", "追加"], index=0, key="lighting_mode")
         selected_lighting_preset = st.selectbox(
             "选择打光预设", 
@@ -711,7 +435,7 @@ if page == "生成提示词":
     for char_id in st.session_state.character_ids:
         with st.expander(f"角色设置 {char_id}", expanded=True):
             # 添加角色预设选择器
-            preset_names = [p["name"] for p in character_presets]
+            preset_names = ["Random"] + [p["name"] for p in character_presets]
             col1, col2 = st.columns([3, 1])
             with col1:
                 selected_char_preset = st.selectbox(
@@ -739,7 +463,7 @@ if page == "生成提示词":
             with col1:
                 hair_color = st.text_input("发色", key=f"hair_color_{char_id}")
             with col2:
-                preset_names = [p["name"] for p in hair_color_presets]
+                preset_names = ["Random"] + [p["name"] for p in hair_color_presets]
                 mode_hair = st.radio("应用模式", ["替换", "追加"], index=0, key=f"hair_mode_{char_id}")
                 selected_hair_preset = st.selectbox(
                     "选择发色预设", 
@@ -754,7 +478,7 @@ if page == "生成提示词":
             with col1:
                 demeanor = st.text_input("神态", key=f"demeanor_{char_id}")
             with col2:
-                preset_names = [p["name"] for p in demeanor_presets]
+                preset_names = ["Random"] + [p["name"] for p in demeanor_presets]
                 mode_demeanor = st.radio("应用模式", ["替换", "追加"], index=0, key=f"demeanor_mode_{char_id}")
                 selected_demeanor_preset = st.selectbox(
                     "选择神态预设", 
@@ -769,7 +493,7 @@ if page == "生成提示词":
             with col1:
                 expression = st.text_input("表情", key=f"expression_{char_id}")
             with col2:
-                preset_names = [p["name"] for p in expression_presets]
+                preset_names = ["Random"] + [p["name"] for p in expression_presets]
                 mode_expression = st.radio("应用模式", ["替换", "追加"], index=0, key=f"expression_mode_{char_id}")
                 selected_expression_preset = st.selectbox(
                     "选择表情预设", 
@@ -784,7 +508,7 @@ if page == "生成提示词":
             with col1:
                 body_type = st.text_input("体型", key=f"body_type_{char_id}")
             with col2:
-                preset_names = [p["name"] for p in body_type_presets]
+                preset_names = ["Random"] + [p["name"] for p in body_type_presets]
                 mode_body = st.radio("应用模式", ["替换", "追加"], index=0, key=f"body_mode_{char_id}")
                 selected_body_preset = st.selectbox(
                     "选择体型预设", 
@@ -802,7 +526,7 @@ if page == "生成提示词":
             with col1:
                 underwear = st.text_input("内衣", key=f"underwear_{char_id}")
             with col2:
-                preset_names = [p["name"] for p in underwear_presets]
+                preset_names = ["Random"] + [p["name"] for p in underwear_presets]
                 mode_underwear = st.radio("应用模式", ["替换", "追加"], index=0, key=f"underwear_mode_{char_id}")
                 selected_underwear_preset = st.selectbox(
                     "选择内衣预设", 
@@ -817,7 +541,7 @@ if page == "生成提示词":
             with col1:
                 outfit = st.text_input("衣着(外衣)", key=f"outfit_{char_id}")
             with col2:
-                preset_names = [p["name"] for p in outfit_presets]
+                preset_names = ["Random"] + [p["name"] for p in outfit_presets]
                 mode_outfit = st.radio("应用模式", ["替换", "追加"], index=0, key=f"outfit_mode_{char_id}")
                 selected_outfit_preset = st.selectbox(
                     "选择服装预设", 
@@ -835,7 +559,7 @@ if page == "生成提示词":
             with col1:
                 pose = st.text_input("动作", key=f"pose_{char_id}")
             with col2:
-                preset_names = [p["name"] for p in pose_presets]
+                preset_names = ["Random"] + [p["name"] for p in pose_presets]
                 mode_pose = st.radio("应用模式", ["替换", "追加"], index=0, key=f"pose_mode_{char_id}")
                 selected_pose_preset = st.selectbox(
                     "选择动作预设", 
@@ -850,7 +574,7 @@ if page == "生成提示词":
             with col1:
                 posture = st.text_input("姿势", key=f"posture_{char_id}")
             with col2:
-                preset_names = [p["name"] for p in posture_presets]
+                preset_names = ["Random"] + [p["name"] for p in posture_presets]
                 mode_posture = st.radio("应用模式", ["替换", "追加"], index=0, key=f"posture_mode_{char_id}")
                 selected_posture_preset = st.selectbox(
                     "选择姿势预设", 
@@ -988,7 +712,58 @@ if page == "生成提示词":
     
     # 生成按钮和结果显示
     if st.button("生成提示词", key="generate_prompt"):
-        final_prompt = assemble_prompt(quality_input, style_input, camera_input, scene_input, lighting_input, characters_data)
+        # 处理所有随机预设
+        quality = quality_input
+        style = style_input
+        camera = camera_input
+        scene = scene_input
+        lighting = lighting_input
+        
+        # 在生成提示词时处理随机预设
+        if selected_quality_preset == "Random" and quality_presets:
+            quality = random.choice(quality_presets)["content"]
+            
+        if selected_style_preset == "Random" and style_presets:
+            style = random.choice(style_presets)["content"]
+            
+        if selected_camera_preset == "Random" and camera_presets:
+            camera = random.choice(camera_presets)["content"]
+            
+        if selected_scene_preset == "Random" and scene_presets:
+            scene = random.choice(scene_presets)["content"]
+            
+        if selected_lighting_preset == "Random" and lighting_presets:
+            lighting = random.choice(lighting_presets)["content"]
+        
+        # 处理角色属性的随机预设
+        for char in characters_data:
+            char_id = st.session_state.character_ids[characters_data.index(char)]
+            
+            if st.session_state.get(f"hair_preset_{char_id}") == "Random" and hair_color_presets:
+                char["hair_color"] = random.choice(hair_color_presets)["content"]
+                
+            if st.session_state.get(f"demeanor_preset_{char_id}") == "Random" and demeanor_presets:
+                char["demeanor"] = random.choice(demeanor_presets)["content"]
+                
+            if st.session_state.get(f"expression_preset_{char_id}") == "Random" and expression_presets:
+                char["expression"] = random.choice(expression_presets)["content"]
+                
+            if st.session_state.get(f"underwear_preset_{char_id}") == "Random" and underwear_presets:
+                char["underwear"] = random.choice(underwear_presets)["content"]
+                
+            if st.session_state.get(f"outfit_preset_{char_id}") == "Random" and outfit_presets:
+                char["outfit"] = random.choice(outfit_presets)["content"]
+                
+            if st.session_state.get(f"body_preset_{char_id}") == "Random" and body_type_presets:
+                char["body_type"] = random.choice(body_type_presets)["content"]
+                
+            if st.session_state.get(f"pose_preset_{char_id}") == "Random" and pose_presets:
+                char["pose"] = random.choice(pose_presets)["content"]
+                
+            if st.session_state.get(f"posture_preset_{char_id}") == "Random" and posture_presets:
+                char["posture"] = random.choice(posture_presets)["content"]
+
+        final_prompt = assemble_prompt(quality, style, camera, scene, lighting, characters_data)
         st.session_state.final_prompt = final_prompt
         
     # 显示生成的提示词
@@ -996,6 +771,88 @@ if page == "生成提示词":
         st.text_area("生成的提示词", st.session_state.final_prompt, height=200)
     else:
         st.info("点击'生成提示词'按钮以查看最终结果")
+
+elif page == "API设置":
+    st.title("API 设置")
+    st.markdown("在此页面，你可以开启或关闭API服务，允许其他应用程序通过HTTP请求生成提示词。")
+    
+    # API 状态显示
+    if st.session_state.api_running:
+        st.success(f"API服务正在运行于端口：{st.session_state.api_port}")
+        st.markdown(f"""
+        ### API 使用方法
+        
+        1. 请求地址: `http://localhost:{st.session_state.api_port}/generate_prompt`
+        2. 请求方法: `POST`
+        3. 请求格式: `application/json`
+        4. 请求体示例:
+        ```json
+        {{
+            "quality": "8k, masterpiece, best quality, ultra-detailed",
+            "style": "oil painting, concept art",
+            "camera": "wide shot",
+            "scene": "forest, autumn",
+            "lighting": "golden hour, sunset lighting",
+            "characters": [
+                {{
+                    "name": "Alice",
+                    "series": "Wonderland",
+                    "hair_color": "blonde",
+                    "demeanor": "curious",
+                    "expression": "smiling",
+                    "underwear": "",
+                    "outfit": "blue dress, white apron",
+                    "body_type": "slim",
+                    "pose": "standing",
+                    "posture": "upright",
+                    "item": "pocket watch",
+                    "extra": ""
+                }}
+            ]
+        }}
+        ```
+        5. 响应示例:
+        ```json
+        {{
+            "status": "success",
+            "prompt": "...", // 生成的完整提示词
+            "quality": "...", // 处理后的质量词
+            "style": "...", // 处理后的风格词
+            "camera": "...", // 处理后的镜头设置
+            "scene": "...", // 处理后的场景设置
+            "lighting": "...", // 处理后的打光设置
+            "characters": [...] // 处理后的角色数据
+        }}
+        ```
+        
+        **特别说明**：对于随机功能，可以将任何字段设置为 "Random"，API将自动随机选择预设。
+        """)
+        
+        # 关闭API按钮
+        if st.button("关闭API服务"):
+            # 仅将状态标记为关闭，线程会自动结束
+            st.session_state.api_running = False
+            st.session_state.api_port = None
+            st.session_state.api_thread = None
+            st.success("API服务已关闭")
+            st.rerun()
+    else:
+        st.warning("API服务当前未运行")
+        
+        # 开启API按钮
+        if st.button("启动API服务"):
+            # 查找可用端口
+            port = find_available_port()
+            if port:
+                # 启动API服务器
+                api_thread = start_api_server(port, st.session_state)
+                st.session_state.api_running = True
+                st.session_state.api_port = port
+                st.session_state.api_thread = api_thread
+                st.success(f"API服务已启动于端口：{port}")
+                st.rerun()
+            else:
+                st.error("无法找到可用端口，请检查5000-5050端口范围是否被占用")
 
 else:  # 预设管理页面
     st.title("预设管理")
