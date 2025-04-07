@@ -1,0 +1,21 @@
+[
+    {
+      "name": "Beach Scene",
+      "content": "tropical island, white sand beach, crystal clear turquoise water, palm trees, volcanic rock formation, luxury resort in background, summer setting",
+      "mode": "replace",
+      "remark": "例子1中的场景描述"
+    },
+    {
+      "name": "Detailed Background",
+      "content": "detailed background",
+      "mode": "replace",
+      "remark": "例子3中简单背景提示"
+    },
+    {
+      "name": "Urban Night",
+      "content": "cityscape, neon lights, rainy night",
+      "mode": "replace",
+      "remark": "补充预设，用于都市风场景"
+    }
+  ]
+  

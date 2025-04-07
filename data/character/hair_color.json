@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Pink Hair",
+    "content": "pink hair",
+    "mode": "replace",
+    "remark": "粉色头发，常见于角色设定"
+  },
+  {
+    "name": "Blonde Hair",
+    "content": "blonde hair, golden locks",
+    "mode": "replace",
+    "remark": "金发"
+  },
+  {
+    "name": "Black Hair",
+    "content": "black hair, raven hair",
+    "mode": "replace",
+    "remark": "黑发"
+  },
+  {
+    "name": "White Hair",
+    "content": "white hair, silver hair",
+    "mode": "replace",
+    "remark": "白发/银发"
+  },
+  {
+    "name": "Blue Hair",
+    "content": "blue hair, azure hair",
+    "mode": "replace",
+    "remark": "蓝发"
+  },
+  {
+    "name": "Red Hair",
+    "content": "red hair, crimson hair",
+    "mode": "replace",
+    "remark": "红发"
+  }
+]

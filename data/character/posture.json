@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Power Pose",
+    "content": "power pose, hands on hips",
+    "mode": "replace",
+    "remark": "力量姿势"
+  },
+  {
+    "name": "Elegant",
+    "content": "elegant posture, graceful stance",
+    "mode": "replace",
+    "remark": "优雅姿势"
+  },
+  {
+    "name": "Relaxed",
+    "content": "relaxed posture, casual stance",
+    "mode": "replace",
+    "remark": "放松姿势"
+  },
+  {
+    "name": "Alert",
+    "content": "alert posture, vigilant stance, ready",
+    "mode": "replace",
+    "remark": "警觉姿势"
+  },
+  {
+    "name": "Confident",
+    "content": "confident posture, shoulders back, head high",
+    "mode": "replace",
+    "remark": "自信姿势"
+  },
+  {
+    "name": "Submissive",
+    "content": "submissive posture, head bowed, shoulders hunched",
+    "mode": "replace",
+    "remark": "顺从姿势"
+  },
+  {
+    "name": "Dramatic",
+    "content": "dramatic pose, theatrical stance, exaggerated",
+    "mode": "replace",
+    "remark": "戏剧性姿势"
+  },
+  {
+    "name": "Contrapposto",
+    "content": "contrapposto, weight on one leg, classical pose",
+    "mode": "replace",
+    "remark": "对比姿势（古典艺术姿势）"
+  },
+  {
+    "name": "Intimidating",
+    "content": "intimidating stance, imposing posture, domineering",
+    "mode": "replace",
+    "remark": "威慑姿势"
+  },
+  {
+    "name": "Protective",
+    "content": "protective stance, shielding posture, defensive",
+    "mode": "replace",
+    "remark": "保护姿势"
+  }
+]

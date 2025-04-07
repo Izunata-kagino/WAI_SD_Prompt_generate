@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Slender",
+    "content": "slender body, slim figure",
+    "mode": "replace",
+    "remark": "苗条体型"
+  },
+  {
+    "name": "Athletic",
+    "content": "athletic build, toned body, muscular",
+    "mode": "replace",
+    "remark": "运动型体型"
+  },
+  {
+    "name": "Curvy",
+    "content": "curvy figure, hourglass shape",
+    "mode": "replace",
+    "remark": "丰满体型"
+  },
+  {
+    "name": "Petite",
+    "content": "petite body, small frame, delicate",
+    "mode": "replace",
+    "remark": "娇小体型"
+  },
+  {
+    "name": "Tall",
+    "content": "tall figure, long limbs, statuesque",
+    "mode": "replace",
+    "remark": "高挑体型"
+  },
+  {
+    "name": "Muscular",
+    "content": "muscular build, strong physique, well-defined muscles",
+    "mode": "replace",
+    "remark": "肌肉发达体型"
+  },
+  {
+    "name": "Full-figured",
+    "content": "full-figured, voluptuous, abundant curves",
+    "mode": "replace",
+    "remark": "丰腴体型"
+  },
+  {
+    "name": "Lean",
+    "content": "lean body, wiry figure, thin but strong",
+    "mode": "replace",
+    "remark": "精瘦体型"
+  }
+]

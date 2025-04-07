@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Smile",
+    "content": "smiling, happy expression",
+    "mode": "replace",
+    "remark": "微笑表情"
+  },
+  {
+    "name": "Serious",
+    "content": "serious expression, determined face",
+    "mode": "replace",
+    "remark": "严肃表情"
+  },
+  {
+    "name": "Blushing",
+    "content": "blushing, red face, embarrassed expression",
+    "mode": "replace", 
+    "remark": "脸红表情"
+  },
+  {
+    "name": "Angry",
+    "content": "angry expression, frowning, furious",
+    "mode": "replace",
+    "remark": "愤怒表情"
+  },
+  {
+    "name": "Surprised",
+    "content": "surprised expression, wide-eyed, shocked",
+    "mode": "replace",
+    "remark": "惊讶表情"
+  },
+  {
+    "name": "Sad",
+    "content": "sad expression, teary-eyed, melancholic",
+    "mode": "replace",
+    "remark": "悲伤表情"
+  },
+  {
+    "name": "Seductive",
+    "content": "seductive expression, sultry gaze, half-lidded eyes",
+    "mode": "replace",
+    "remark": "诱惑表情"
+  },
+  {
+    "name": "Worried",
+    "content": "worried expression, concerned look, anxious",
+    "mode": "replace",
+    "remark": "担忧表情"
+  },
+  {
+    "name": "Peaceful",
+    "content": "peaceful expression, serene look, tranquil",
+    "mode": "replace",
+    "remark": "平静表情"
+  }
+]

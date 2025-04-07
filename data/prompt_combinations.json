@@ -1,0 +1,92 @@
+[
+    {
+      "name": "Combination Example 1",
+      "fields": {
+        "quality": {
+          "content": "very awa, masterpiece, best quality, year 2024, newest, highres, absurdres",
+          "mode": "replace"
+        },
+        "artists": {
+          "content": "ciloranko, (tianliang duohe fangdongye:0.9), ask \\(askzy\\), (wlop:0.8)",
+          "mode": "replace"
+        },
+        "camera": {
+          "content": "full-length portrait, angry(chassing pose:1.25)",
+          "mode": "replace"
+        },
+        "scene": {
+          "content": "(business formal dress:1.25), (fishnet strappy teddy lingerie:1.25)",
+          "mode": "replace"
+        },
+        "lighting": {
+          "content": "neon lights light, light from top, agfa vista",
+          "mode": "replace"
+        },
+        "characters": {
+          "content": [
+            {
+              "name": "chihaya anon",
+              "series": "",
+              "hair_color": "pink hair",
+              "demeanor": "confident demeanor",
+              "expression": "serious expression",
+              "underwear": "fishnet underwear, strappy teddy lingerie",
+              "outfit": "business formal dress",
+              "body_type": "slender body",
+              "pose": "standing",
+              "posture": "power pose",
+              "item": "",
+              "extra": "grey eyes, unaligned breasts"
+            }
+          ],
+          "mode": "replace"
+        }
+      },
+      "remark": "例子5：人物、打光、服饰组合预设"
+    },
+    {
+      "name": "Combination Example 2",
+      "fields": {
+        "quality": {
+          "content": "very awa, masterpiece, best quality, year 2024, newest, highres, absurdres",
+          "mode": "replace"
+        },
+        "artists": {
+          "content": "ciloranko, (tianliang duohe fangdongye:0.9), ask \\(askzy\\), (wlop:0.8)",
+          "mode": "replace"
+        },
+        "camera": {
+          "content": "full body, serene(power pose:1.25)",
+          "mode": "replace"
+        },
+        "scene": {
+          "content": "gothic dress:1.25, embroidered silk bralette lingerie:1.25",
+          "mode": "replace"
+        },
+        "lighting": {
+          "content": "moonlight light, light from top-right, ektachrome",
+          "mode": "replace"
+        },
+        "characters": {
+          "content": [
+            {
+              "name": "yuigahama yui",
+              "series": "",
+              "hair_color": "pink hair",
+              "demeanor": "cheerful demeanor",
+              "expression": "bright smile",
+              "underwear": "silk bralette, embroidered lingerie",
+              "outfit": "gothic dress",
+              "body_type": "slender body",
+              "pose": "standing",
+              "posture": "elegant posture",
+              "item": "",
+              "extra": "red eyes"
+            }
+          ],
+          "mode": "replace"
+        }
+      },
+      "remark": "例子4：单角色组合预设"
+    }
+  ]

@@ -1,0 +1,21 @@
+[
+    {
+      "name": "Close Up Portrait",
+      "content": "close-up, portrait, looking at viewer, from front angle, elegant composition",
+      "mode": "replace",
+      "remark": "例子1中镜头描述"
+    },
+    {
+      "name": "Full Body",
+      "content": "full body, serene(power pose:1.25)",
+      "mode": "replace",
+      "remark": "例子4中使用"
+    },
+    {
+      "name": "Full-length Portrait",
+      "content": "full-length portrait, angry(chassing pose:1.25)",
+      "mode": "replace",
+      "remark": "例子5中使用"
+    }
+  ]
+  

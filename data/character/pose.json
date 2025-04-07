@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Standing",
+    "content": "standing, upright position",
+    "mode": "replace",
+    "remark": "站立动作"
+  },
+  {
+    "name": "Walking",
+    "content": "walking, mid-stride",
+    "mode": "replace",
+    "remark": "行走动作"
+  },
+  {
+    "name": "Running",
+    "content": "running, in motion",
+    "mode": "replace",
+    "remark": "奔跑动作"
+  },
+  {
+    "name": "Sitting",
+    "content": "sitting, seated position",
+    "mode": "replace",
+    "remark": "坐姿动作"
+  },
+  {
+    "name": "Jumping",
+    "content": "jumping, mid-air leap",
+    "mode": "replace",
+    "remark": "跳跃动作"
+  },
+  {
+    "name": "Dancing",
+    "content": "dancing, graceful movement",
+    "mode": "replace",
+    "remark": "跳舞动作"
+  },
+  {
+    "name": "Fighting",
+    "content": "fighting stance, combat ready",
+    "mode": "replace",
+    "remark": "战斗动作"
+  },
+  {
+    "name": "Kneeling",
+    "content": "kneeling, on one or both knees",
+    "mode": "replace",
+    "remark": "跪姿动作"
+  },
+  {
+    "name": "Reclining",
+    "content": "reclining, lying back, relaxed position",
+    "mode": "replace",
+    "remark": "斜倚动作"
+  },
+  {
+    "name": "Swimming",
+    "content": "swimming, in water motion",
+    "mode": "replace",
+    "remark": "游泳动作"
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Confident",
+    "content": "confident demeanor, self-assured",
+    "mode": "replace",
+    "remark": "自信的神态"
+  },
+  {
+    "name": "Shy",
+    "content": "shy demeanor, timid, bashful",
+    "mode": "replace",
+    "remark": "害羞的神态"
+  },
+  {
+    "name": "Mysterious",
+    "content": "mysterious demeanor, enigmatic",
+    "mode": "replace",
+    "remark": "神秘的神态"
+  },
+  {
+    "name": "Cheerful",
+    "content": "cheerful demeanor, joyful, upbeat",
+    "mode": "replace",
+    "remark": "开朗的神态"
+  },
+  {
+    "name": "Serious",
+    "content": "serious demeanor, solemn, focused",
+    "mode": "replace",
+    "remark": "严肃的神态"
+  },
+  {
+    "name": "Melancholic",
+    "content": "melancholic demeanor, wistful, thoughtful",
+    "mode": "replace",
+    "remark": "忧郁的神态"
+  },
+  {
+    "name": "Arrogant",
+    "content": "arrogant demeanor, haughty, proud",
+    "mode": "replace",
+    "remark": "傲慢的神态"
+  },
+  {
+    "name": "Gentle",
+    "content": "gentle demeanor, kind, caring",
+    "mode": "replace",
+    "remark": "温柔的神态"
+  }
+]

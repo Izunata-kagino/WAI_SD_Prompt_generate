@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Business Formal",
+    "content": "business formal dress, professional attire",
+    "mode": "replace",
+    "remark": "商务正装"
+  },
+  {
+    "name": "Gothic Dress",
+    "content": "gothic dress, dark elegant outfit",
+    "mode": "replace",
+    "remark": "哥特风裙装"
+  },
+  {
+    "name": "Casual",
+    "content": "casual wear, t-shirt, jeans",
+    "mode": "replace",
+    "remark": "休闲装"
+  },
+  {
+    "name": "Summer Dress",
+    "content": "light summer dress, floral pattern, airy",
+    "mode": "replace",
+    "remark": "夏日连衣裙"
+  },
+  {
+    "name": "Traditional Kimono",
+    "content": "traditional kimono, ornate pattern, obi sash",
+    "mode": "replace",
+    "remark": "传统和服"
+  },
+  {
+    "name": "School Uniform",
+    "content": "school uniform, sailor collar, pleated skirt",
+    "mode": "replace",
+    "remark": "学校制服"
+  },
+  {
+    "name": "Maid Outfit",
+    "content": "maid outfit, frilly dress, apron",
+    "mode": "replace",
+    "remark": "女仆装"
+  },
+  {
+    "name": "Cyberpunk",
+    "content": "cyberpunk outfit, futuristic, neon accents, tech accessories",
+    "mode": "replace",
+    "remark": "赛博朋克风格服装"
+  },
+  {
+    "name": "Evening Gown",
+    "content": "elegant evening gown, formal dress, luxurious",
+    "mode": "replace",
+    "remark": "晚礼服"
+  },
+  {
+    "name": "Sporty",
+    "content": "sporty outfit, athletic wear, workout clothes",
+    "mode": "replace",
+    "remark": "运动服装"
+  }
+]

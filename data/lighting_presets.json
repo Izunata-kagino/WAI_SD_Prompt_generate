@@ -1,0 +1,27 @@
+[
+    {
+      "name": "Golden Hour",
+      "content": "golden hour, sunset colors, ocean breeze, warm natural lighting, coastal atmosphere",
+      "mode": "replace",
+      "remark": "例子1中的打光描述"
+    },
+    {
+      "name": "Fluorescent",
+      "content": "fluorescent lighting, light from left, hdr photography",
+      "mode": "replace",
+      "remark": "例子3中的打光"
+    },
+    {
+      "name": "Moonlight",
+      "content": "moonlight light, light from top-right, ektachrome",
+      "mode": "replace",
+      "remark": "例子4中的打光"
+    },
+    {
+      "name": "Neon Lights",
+      "content": "neon lights light, light from top, agfa vista",
+      "mode": "replace",
+      "remark": "例子5中的打光"
+    }
+  ]
+  

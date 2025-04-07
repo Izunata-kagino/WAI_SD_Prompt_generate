@@ -1,0 +1,56 @@
+[
+  {
+    "name": "nude",
+    "content": "nude, nipples, pubic hair, pussy",
+    "mode": "replace",
+    "remark": "裸体"
+  },
+  {
+    "name": "Lace Lingerie",
+    "content": "lace lingerie, delicate underwear",
+    "mode": "replace",
+    "remark": "蕾丝内衣"
+  },
+  {
+    "name": "Silk Bralette",
+    "content": "silk bralette, luxury underwear",
+    "mode": "replace",
+    "remark": "丝绸胸衣"
+  },
+  {
+    "name": "Fishnet",
+    "content": "fishnet underwear, revealing lingerie",
+    "mode": "replace",
+    "remark": "网状内衣"
+  },
+  {
+    "name": "Simple Cotton",
+    "content": "simple cotton underwear, comfortable, plain",
+    "mode": "replace",
+    "remark": "简单棉质内衣"
+  },
+  {
+    "name": "Corset",
+    "content": "tight corset, waist cincher, structured underwear",
+    "mode": "replace",
+    "remark": "紧身胸衣"
+  },
+  {
+    "name": "Strappy Teddy",
+    "content": "strappy teddy lingerie, intricate design",
+    "mode": "replace",
+    "remark": "带状连体内衣"
+  },
+  {
+    "name": "Sports Bra",
+    "content": "sports bra, athletic underwear, comfortable",
+    "mode": "replace",
+    "remark": "运动内衣"
+  },
+  {
+    "name": "Embroidered Set",
+    "content": "embroidered lingerie set, detailed stitching, ornate",
+    "mode": "replace",
+    "remark": "刺绣内衣套装"
+  }
+]
